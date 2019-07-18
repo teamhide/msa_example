@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sanic
+  labels:
+    service: sanic
+spec:
+  selector:
+    app: sanic
+  ports:
+  - port: 8000
+    targetPort: 8000

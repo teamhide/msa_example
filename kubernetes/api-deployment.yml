@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: sanic
+  labels:
+    name: sanic
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sanic
+    spec:
+      containers:
+      - name: sanic
+        image: sanic:latest
+        env:
+        - name: SANIC_CONFIG
+          value: "development"
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres-credentials
+              key: user
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-credentials
+              key: password
+      restartPolicy: Always
